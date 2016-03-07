@@ -51,11 +51,36 @@ FieldType Field::get(int x, int y)
  bool Field::isSafe(int x, int y)
  {
  	//TODO: Complete this function, isSafe(int,int)
- 	return true;
+  try
+  {
+    if(x < 0 || x >= FIELD_DIMENSION || y < 0 || y >= FIELD_DIMENSION)
+ 	  {
+ 		   throw "Out of bounds";
+ 	  }
+    else
+    {
+      if (_map[x][y] == MINE_SHOWN || _map[x][y] == MINE_HIDDEN )
+      {
+        return false;
+      }
+      else if (_map[x][y] == EMPTY_SHOWN || _map[x][y] == EMPTY_HIDDEN )
+      {
+        return true;
+      }
+    }
+  }
+
+  catch (...)
+  {
+    std::cerr << " Limist out of bounds";
+  }
+
+
+ 	//return true;
  }
 
 /**
- * Changes the location from EMPTY_HIDDEN to EMPTY_SHOWN for the 
+ * Changes the location from EMPTY_HIDDEN to EMPTY_SHOWN for the
  * location and any valid locations adjacent (immediately above,
  * below, left, or right as printed) to the provided (x,y) location
 **/
